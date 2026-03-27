@@ -22,7 +22,7 @@
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
 #📝 Blog Management System (NestJS + PostgreSQL)
-# 📝 NestJS Role-Based Blog System
+📝 NestJS Role-Based Blog System
 
 A robust, production-ready backend API built with **NestJS**, **PostgreSQL**, and **Prisma**. This project demonstrates a complete Authentication and Authorization flow, including JSON Web Tokens (JWT) and custom Role-Based Access Control (RBAC) guards.
 
@@ -38,7 +38,7 @@ A robust, production-ready backend API built with **NestJS**, **PostgreSQL**, an
 
 ---
 
-## 📸 Project Preview
+📸 Project Preview
 
 ### **1. Database Schema (Prisma Models)**
 ![Database Schema](./screenshots/database_schema.png)
@@ -66,15 +66,15 @@ git clone [https://github.com/NikhilKhare973/blog-app.git](https://github.com/Ni
 cd blog-app
 npm install
 ```
-##2. Database Setup (Docker)
+2. Database Setup (Docker)
 Ensure Docker Desktop is running, then spin up the PostgreSQL container:
 docker-compose up -d
 
-##3. Environment Variables
+3. Environment Variables
 Create a .env file in the root folder and add:
 DATABASE_URL="postgresql://admin:adminpassword@localhost:5432/blog_db?schema=public"
 
-###4. Database Migration
+4. Database Migration
 Generate the Prisma client and push the schema to Postgres:
 npx prisma generate
 npx prisma migrate dev --name init
@@ -83,7 +83,7 @@ npx prisma migrate dev --name init
 Bash
 npm run start:dev
 
-#🛤️ API Roadmap
+🛤️ API Roadmap
 Auth Endpoints
 Method,Endpoint,Access,Description
 POST,/auth/signup,Public,Register a new user (Reader/Author/Admin)
@@ -104,7 +104,7 @@ GET,/users,Admin,List all registered users
 PATCH,/users/:id/role,Admin,Update a user's role
 
 
-##👤 Author
+👤 Author
 Nikhil Computer Science Graduate | Full Stack Developer LinkedIn | GitHub
 
 ---
