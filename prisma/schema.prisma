@@ -1,0 +1,27 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL") 
+}
+
+// --- THIS IS YOUR USER TABLE ---
+model User {
+  id       Int     @id @default(autoincrement())
+  email    String  @unique
+  password String
+  role     String  @default("READER") // Roles: ADMIN, AUTHOR, READER
+  blogs    Blog[]  // A user can have many blogs
+}
+
+// --- THIS IS YOUR BLOG TABLE ---
+model Blog {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String
+  authorId  Int
+  author    User     @relation(fields: [authorId], references: [id])
+  createdAt DateTime @default(now())
+}

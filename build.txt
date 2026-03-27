@@ -1,0 +1,139 @@
+cd blog-app
+ npm run start
+
+
+Here is your roadmap:
+
+Part 1 (Today): Setup NestJS and create the Database tables.
+
+Part 2: Authentication (Signup, Login, JWT).
+
+Part 3: Role Guards (Protecting routes for Admin/Authors).
+
+Part 4: Building the Blog and User APIs.
+
+
+
+
+src/
+├── prisma/                 
+│   ├── prisma.service.ts   // Connects to your SQLite database
+│   └── prisma.module.ts    // Makes the DB available to the rest of the app
+├── auth/                   
+│   ├── auth.controller.ts  // Handles /signup and /login routes
+│   ├── auth.service.ts     // Verifies passwords and creates JWT tokens
+│   └── auth.module.ts      
+├── users/                  
+│   ├── users.controller.ts // Handles Admin APIs like getting all users
+│   ├── users.service.ts    // Logic for finding or updating user roles
+│   └── users.module.ts     
+├── blogs/                  
+│   ├── blogs.controller.ts // Handles CRUD routes for blogs
+│   ├── blogs.service.ts    // Logic for saving or deleting blogs in Prisma
+│   └── blogs.module.ts     
+├── app.module.ts           // The master file that imports Auth, Users, and Blogs
+└── main.ts                 // The entry point that starts your server
+
+
+
+POST -  http://localhost:3000/auth/signup 
+body row - json - 
+{
+  "email": "test@example.com",
+  "password": "password123",
+  "role": "AUTHOR"
+}
+
+
+PoST - http://localhost:3000/auth/login  
+
+row - json 
+{
+  "email": "test@example.com",
+  "password": "password123"
+}
+
+getting access_token : "- - - - - - -- - -  - -- "
+
+
+
+post -- http://localhost:3000/blogs  (post ) 
+
+in Postman, click on the Authorization tab
+Change the Type dropdown to --> Bearer Token.
+Paste your long token into the Token box.
+
+--
+Write the Blog (Body):
+Click the Body tab.
+Select raw and JSON.
+Paste this exact JSON:
+
+{
+  "title": "My First NestJS Blog",
+  "content": "Building a role-based backend is actually pretty fun!"
+}
+
+Click Send!!!!
+
+
+use GET - to see all user info ---->
+GET -- http://localhost:3000/blogs -- click Send without any token
+
+
+Patch - updating - 
+in Postman url --> http://localhost:3000/blogs/1
+ 
+ -Auth: Make sure your Bearer Token is still in the Authorization tab
+
+ Body: (raw JSON) :-
+ {
+  "title": "My Updated NestJS Blog!",
+  "content": "I just added the update feature and it works perfectly."
+}
+
+
+
+------------------------
+
+new admin - make 
+http://localhost:3000/auth/signup
+
+row - json - 
+{
+  "email": "NK@example.com",
+  "password": "password",
+  "role": "ADMIN"
+}
+
+Go to your Login route and log in with that new Admin user to get your Admin token.
+
+
+2. http://localhost:3000/auth/login 
+
+{
+  "email": "NK@example.com",
+  "password": "password"
+}
+
+get access_token - "____---___---" 
+-- 1d - token -> eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsImVtYWlsIjoiTktAZXhhbXBsZS5jb20iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NzQ1OTQ1MTQsImV4cCI6MTc3NDY4MDkxNH0.8GL9YMRWbDoc60ZcttQ1pBXfNnSGUuFEiLpKCyNjBx8
+
+Try to fetch all users by running a GET request to http://localhost:3000/users.
+
+
+update user role - ---role change --
+Step 1: Test "Update User Role" in Postman
+Since we already added the code in the last step, let's just make sure it works. You can now promote a "READER" to an "AUTHOR".
+
+Method: PATCH
+
+URL: http://localhost:3000/users/1/role (Replace 1 with the ID of the user you want to change).
+
+Auth: Make sure your Admin Token is in the Bearer Token field.
+
+Body (JSON):
+{
+  "role": "AUTHOR"
+}
+--> Click Send
